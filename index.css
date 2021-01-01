@@ -1,0 +1,33 @@
+html, body
+{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#mainFlex
+{
+    z-index: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: 100%;
+}
+
+#appbar
+{
+        flex: 1;
+    background-color: midnightblue;
+    color: white;
+    font-family: 'Caladea';
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+#landingPageCanvas
+{
+        flex: 7;
+    background-color: pink;
+    z-index: 0;
+}

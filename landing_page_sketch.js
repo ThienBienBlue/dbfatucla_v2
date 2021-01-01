@@ -12,8 +12,8 @@ class Airplane
 
     reinit()
     {
-        const base_spd = windowWidth / 200;
-        this._xpos = windowWidth * Math.random();
+        const base_spd = scaled_window_width / 200;
+        this._xpos = scaled_window_width * Math.random();
         this._ypos = -150;
 
         this._xvel = 10 * (Math.random() - 0.5);
@@ -52,16 +52,21 @@ class Airplane
         this._xvel += this._xaccel;
         this._ypos += this._yvel;
 
-        if (this._ypos > windowHeight + 10)
+        if (this._ypos > scaled_window_height + 10)
             this.reinit();
     }
 }
 
+var scaled_window_height;
+var scaled_window_width;
 var airplanes = [];
 
 function setup() 
 {
-    var canvas = createCanvas(windowWidth, windowHeight);
+    const dom = document.getElementById('landingPageCanvas');
+    scaled_window_height = dom.clientHeight;
+    scaled_window_width = dom.clientWidth;
+    var canvas = createCanvas(scaled_window_width, scaled_window_height);
     canvas.parent('landingPageCanvas');
 
     const colors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
@@ -71,9 +76,17 @@ function setup()
   
 function draw() 
 {
+    const dom = document.getElementById('landingPageCanvas');
+    if (dom.clientWidth != scaled_window_width || dom.clientHeight != scaled_window_height)
+    {
+        scaled_window_height = dom.clientHeight;
+        scaled_window_width = dom.clientWidth;
+        resizeCanvas(scaled_window_width, scaled_window_height);
+    }
+
     noStroke();
     fill(color(135, 206, 250));
-    rect(0, 0, windowWidth, windowHeight)
+    rect(0, 0, scaled_window_width, scaled_window_height)
 
     for (idx = 0; idx < 7; idx++)
     {
